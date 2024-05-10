@@ -59,20 +59,21 @@ export default function Personal() {
     }
 
     return (
-        <div>
+        <div className="container">
             <h3 key="header">Personal</h3>
             <TaskList tasks={personalTasks} 
                     handleStatus={handlePersonalStatus} 
                     handleDeleteTask={handleDeletePersonalTask} 
                     handleEditTask={handleEditPersonalTask} />
-            <div className="row">
-                <div className="col">
+            <div className="row mb-4">
+                <div className="col-auto">
                     <input type="text" 
+                    className="form-control"
                     value={personalTask.task}
                     placeholder="Take a task" 
                     onChange={handlePersonalTask} />
                 </div>
-                <div className="col">
+                <div className="col-auto">
                     <button className="btn btn-primary" onClick={handlePersonal}>Add task</button>
                 </div>
             </div>

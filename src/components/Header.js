@@ -12,7 +12,7 @@ export default function Header() {
                     <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="#">Personal</a>
+                        <button className="nav-link active" aria-current="page" href="#">Personal</button>
                         </li>
                         <li className="nav-item">
                         <a className="nav-link" href="#">Sweat</a>

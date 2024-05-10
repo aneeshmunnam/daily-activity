@@ -6,6 +6,7 @@ import Sweat from './components/Sweat';
 function App() {
   return (
     <div className="container">
+        <Header />
         <Personal />
         <Sweat />
     </div>
