@@ -64,8 +64,8 @@ export default function Personal({selectedDate}) {
     }
 
     return (
-        <div className="container">
-            <h3 key="header">Personal</h3>
+        <div>
+            <h2 key="header">Personal</h2>
             <TaskList tasks={personalTasks} 
                     handleStatus={handlePersonalStatus} 
                     handleDeleteTask={handleDeletePersonalTask} 

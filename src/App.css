@@ -8,11 +8,27 @@
   margin: 0 10px; /* Adjust this margin as needed */
 }
 
-/* body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+.column {
+  background-color: #198754;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
   height: 100vh;
-} */
+}
+
+.responsive-three-column-grid {
+  display:block;
+}
+
+.responsive-three-column-grid > * {
+  padding:1rem;
+}
+
+@media (min-width:768px) {
+  .responsive-three-column-grid {
+      display: grid;
+      grid-auto-rows: 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  }
+}

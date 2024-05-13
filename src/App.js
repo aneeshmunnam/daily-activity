@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import Personal from './components/Personal';
 import Sweat from './components/Sweat';
+import Work from './components/Work';
 
 function App() {
 
@@ -15,8 +16,19 @@ function App() {
   return (
     <div>
         <Header onDateChange={handleDateChange} />
-        <Personal selectedDate={selectedDate}/>
-        <Sweat />
+        <div className="container-fluid">
+          <div className='row'>
+            <div className='col-sm column'>
+              <Personal selectedDate={selectedDate}/>
+            </div>
+            <div className='col-sm column'>
+              <Sweat />
+            </div>
+            <div className='col-sm column'>
+              <Work />
+            </div>
+          </div>
+        </div>
     </div>
   );
 }

@@ -24,8 +24,8 @@ export default function Header({onDateChange}) {
                     </button>
                     <h1>Daily App</h1>
                     <div className="d-flex">
-                        <h4>Which day?</h4>
                         <input type="date" value={date} 
+                        className="form-control"
                         max={tommorowDate}
                         onChange={handleDateChange}/>
                     </div>
