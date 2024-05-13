@@ -49,7 +49,7 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
     } else {
         editTask = (
             <>
-                <div className="col-2" key={index}>
+                <div className="col-1" key={index}>
                     <label key={index}>{task.task}</label>
                 </div>
                 <div className="col-auto" key={index + 1}>

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskList from "../common/TaskList";
 
-export default function Personal() {
+export default function Personal({selectedDate}) {
     const [personalTasks, setPersonalTasks] = useState([]);
 
     const [personalTask, setPersonalTask] = useState({
@@ -9,6 +9,11 @@ export default function Personal() {
         "task": "",
         "status": false
     });
+
+    useEffect(() => {
+        // Will pull data from rxdb
+        setPersonalTasks([]);
+    }, [selectedDate]);
 
     const handlePersonal = (e) => {
         if (personalTask && personalTask.task.length === 0) return;

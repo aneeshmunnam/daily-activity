@@ -1,26 +1,33 @@
-export default function Header() {
+import { useState } from "react"
+
+export default function Header({onDateChange}) {
+
+    const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+    const tommorow = new Date();
+    tommorow.setDate(new Date().getDate()+1);
+    const tommorowDate = tommorow.toISOString().split('T')[0];
+
+    const handleDateChange = (event) => {
+        const date = event.currentTarget.value;
+        setDate(date);
+        onDateChange(date)
+    };
+
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <nav className="navbar navbar-expand-lg bg-success">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">Daily App</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
-                    aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+                        aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                        <button className="nav-link active" aria-current="page" href="#">Personal</button>
-                        </li>
-                        <li className="nav-item">
-                        <a className="nav-link" href="#">Sweat</a>
-                        </li>
-                        <li className="nav-item">
-                        <a className="nav-link" href="#">Work</a>
-                        </li>
-                    </ul>
+                    <h1>Daily App</h1>
+                    <div className="d-flex">
+                        <h4>Which day?</h4>
+                        <input type="date" value={date} 
+                        max={tommorowDate}
+                        onChange={handleDateChange}/>
                     </div>
                 </div>
             </nav>
