@@ -75,11 +75,11 @@ export default function Personal({selectedDate}) {
                     <input type="text" 
                     className="form-control"
                     value={personalTask.task}
-                    placeholder="Take a task" 
+                    placeholder="Take a personal task" 
                     onChange={handlePersonalTask} />
                 </div>
                 <div className="col-auto">
-                    <button className="btn btn-primary" onClick={handlePersonal}>Add task</button>
+                    <button className="btn btn-primary" onClick={handlePersonal}>Personal task</button>
                 </div>
             </div>
         </div>

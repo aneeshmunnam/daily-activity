@@ -19,13 +19,13 @@ function App() {
         <div className="container-fluid">
           <div className='row'>
             <div className='col-sm column'>
-              <Personal selectedDate={selectedDate}/>
+              <Personal selectedDate={selectedDate} />
             </div>
             <div className='col-sm column'>
               <Sweat />
             </div>
             <div className='col-sm column'>
-              <Work />
+              <Work selectedDate={selectedDate} />
             </div>
           </div>
         </div>
