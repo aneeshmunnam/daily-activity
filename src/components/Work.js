@@ -65,10 +65,6 @@ export default function Work({selectedDate}) {
     return (
         <div>
             <h2 key="header">Work</h2>
-            <TaskList tasks={workTasks} 
-                    handleStatus={handleWorkStatus} 
-                    handleDeleteTask={handleDeleteWorkTask} 
-                    handleEditTask={handleEditWorkTask} />
             <div className="row mb-4">
                 <div className="col-auto">
                     <input type="text" 
@@ -81,6 +77,10 @@ export default function Work({selectedDate}) {
                     <button className="btn btn-primary" onClick={handlePersonal}>Work task</button>
                 </div>
             </div>
+            <TaskList tasks={workTasks} 
+                    handleStatus={handleWorkStatus} 
+                    handleDeleteTask={handleDeleteWorkTask} 
+                    handleEditTask={handleEditWorkTask} />
         </div>
     );
 }

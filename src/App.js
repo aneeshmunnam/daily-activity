@@ -22,7 +22,7 @@ function App() {
               <Personal selectedDate={selectedDate} />
             </div>
             <div className='col-sm column'>
-              <Sweat />
+              <Sweat selectedDate={selectedDate} />
             </div>
             <div className='col-sm column'>
               <Work selectedDate={selectedDate} />

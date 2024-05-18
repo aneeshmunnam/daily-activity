@@ -66,10 +66,6 @@ export default function Personal({selectedDate}) {
     return (
         <div>
             <h2 key="header">Personal</h2>
-            <TaskList tasks={personalTasks} 
-                    handleStatus={handlePersonalStatus} 
-                    handleDeleteTask={handleDeletePersonalTask} 
-                    handleEditTask={handleEditPersonalTask} />
             <div className="row mb-4">
                 <div className="col-auto">
                     <input type="text" 
@@ -82,6 +78,10 @@ export default function Personal({selectedDate}) {
                     <button className="btn btn-primary" onClick={handlePersonal}>Personal task</button>
                 </div>
             </div>
+            <TaskList tasks={personalTasks} 
+                    handleStatus={handlePersonalStatus} 
+                    handleDeleteTask={handleDeletePersonalTask} 
+                    handleEditTask={handleEditPersonalTask} />
         </div>
     );
 }
