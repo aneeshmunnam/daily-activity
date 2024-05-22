@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TaskList from "../common/TaskList";
 
 export default function Personal({selectedDate}) {
     const [personalTasks, setPersonalTasks] = useState([]);
 
-    const [personalTask, setPersonalTask] = useState({
-        "id": 0,
-        "task": "",
-        "status": false
-    });
+    const personalTask = useRef('');
 
     useEffect(() => {
         // Will pull data from rxdb
@@ -16,25 +12,18 @@ export default function Personal({selectedDate}) {
     }, [selectedDate]);
 
     const handlePersonal = (e) => {
-        if (personalTask && personalTask.task.length === 0) return;
+        if (personalTask && personalTask.current.length === 0) return;
+        const task = {
+            "id": Math.floor(Math.random() * 100000) + 1,
+            "task": personalTask.current.value,
+            "status": false
+        };
         setPersonalTasks([
             ...personalTasks,
-            personalTask
+            task
         ]);
-        setPersonalTask({
-            "id": 0,
-            "task": "",
-            "status": false
-        });
+        personalTask.current.value = '';
         e.preventDefault();
-    };
-
-    const handlePersonalTask = (e) => {
-        setPersonalTask({
-            "id": Math.floor(Math.random() * 100000) + 1,
-            "task": e.target.value,
-            "status": false
-        })
     };
 
     const handlePersonalStatus = (id) => {
@@ -70,9 +59,8 @@ export default function Personal({selectedDate}) {
                 <div className="col-auto">
                     <input type="text" 
                     className="form-control"
-                    value={personalTask.task}
-                    placeholder="Take a personal task" 
-                    onChange={handlePersonalTask} />
+                    ref={personalTask}
+                    placeholder="Take a personal task" />
                 </div>
                 <div className="col-auto">
                     <button className="btn btn-primary" onClick={handlePersonal}>Personal task</button>

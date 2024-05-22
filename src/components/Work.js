@@ -1,39 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TaskList from "../common/TaskList";
 
 export default function Work({selectedDate}) {
     const [workTasks, setWorkTasks] = useState([]);
 
-    const [workTask, setWorkTask] = useState({
-        "id": 0,
-        "task": "",
-        "status": false
-    });
+    const workTask = useRef('');
 
     useEffect(() => {
         setWorkTasks([]);
     }, [selectedDate]);
 
-    const handlePersonal = (e) => {
-        if (workTask && workTask.task.length === 0) return;
+    const handleWork = (e) => {
+        if (workTask.current && workTask.current.length === 0) return;
+        const task = {
+            "id": Math.floor(Math.random() * 100000) + 1,
+            "task": workTask.current.value,
+            "status": false
+        };
         setWorkTasks([
             ...workTasks,
-            workTask
+            task
         ]);
-        setWorkTask({
-            "id": 0,
-            "task": "",
-            "status": false
-        });
+        workTask.current.value = '';
         e.preventDefault();
-    };
-
-    const handleWorkTask = (e) => {
-        setWorkTask({
-            "id": Math.floor(Math.random() * 100000) + 1,
-            "task": e.target.value,
-            "status": false
-        })
     };
 
     const handleWorkStatus = (id) => {
@@ -69,12 +58,11 @@ export default function Work({selectedDate}) {
                 <div className="col-auto">
                     <input type="text" 
                     className="form-control"
-                    value={workTask.task}
-                    placeholder="Take a work task" 
-                    onChange={handleWorkTask} />
+                    ref={workTask}
+                    placeholder="Take a work task" />
                 </div>
                 <div className="col-auto">
-                    <button className="btn btn-primary" onClick={handlePersonal}>Work task</button>
+                    <button className="btn btn-primary" onClick={handleWork}>Work task</button>
                 </div>
             </div>
             <TaskList tasks={workTasks} 
