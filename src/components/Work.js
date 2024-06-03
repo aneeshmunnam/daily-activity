@@ -6,21 +6,46 @@ export default function Work({selectedDate}) {
 
     const workTask = useRef('');
 
+    // useEffect(() => {
+    //     const tasks = JSON.parse(localStorage.getItem("workTasksWithDate"));
+    //     if (tasks) {
+    //         setWorkTasks(tasks);
+    //     }
+    // }, []);
+
     useEffect(() => {
-        setWorkTasks([]);
+        let selectedWorkTasks = localStorage.getItem("workTasksWithDate") ? 
+                    JSON.parse(localStorage.getItem("workTasksWithDate")) : [];
+        selectedWorkTasks.filter(task => task.date === selectedDate)
+        setWorkTasks(selectedWorkTasks);
     }, [selectedDate]);
+
+    useEffect(() => {
+        if (workTasks.length > 0) {
+            let currentTasks = JSON.parse(localStorage.getItem("workTasksWithDate"));
+            if (currentTasks)
+                currentTasks.push(workTasks);
+            else 
+                currentTasks = workTasks;
+            localStorage.setItem("workTasksWithDate", JSON.stringify(currentTasks));
+        }
+        console.log(localStorage.getItem("workTasksWithDate"));
+    }, [workTasks]);
 
     const handleWork = (e) => {
         if (workTask.current && workTask.current.length === 0) return;
         const task = {
             "id": Math.floor(Math.random() * 100000) + 1,
             "task": workTask.current.value,
-            "status": false
+            "status": false,
+            "date": selectedDate
         };
         setWorkTasks([
             ...workTasks,
             task
         ]);
+        // workTasks.push(task);
+        // localStorage.setItem("workTasksWithDate", JSON.stringify(workTasks));
         workTask.current.value = '';
         e.preventDefault();
     };
