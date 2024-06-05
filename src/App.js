@@ -13,7 +13,7 @@ function App() {
   tommorow.setDate(new Date().getDate()+1);
   const tommorowDate = tommorow.toISOString().split('T')[0];
 
-  const [selectedDate, setSelectedDate] = useState(tommorowDate);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleDateChange = (selectedDateNav) => {
     setSelectedDate(selectedDateNav);
