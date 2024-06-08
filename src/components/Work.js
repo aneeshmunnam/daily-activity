@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import TaskList from "../common/TaskList";
+import { db } from "../common/db";
+import { useLiveQuery } from "dexie-react-hooks";
 
 export default function Work({selectedDate}) {
+    console.log(useLiveQuery(() => db.workTasks.toArray()));
     const [workTasks, setWorkTasks] = useState([]);
 
     const workTask = useRef('');
@@ -32,7 +35,7 @@ export default function Work({selectedDate}) {
     //     console.log(localStorage.getItem("workTasksWithDate"));
     // }, [workTasks]);
 
-    const handleWork = (e) => {
+    const handleWork = async (e) => {
         if (workTask.current && workTask.current.length === 0) return;
         const task = {
             "id": Math.floor(Math.random() * 100000) + 1,
@@ -40,6 +43,14 @@ export default function Work({selectedDate}) {
             "status": false,
             "date": selectedDate
         };
+
+        await db.workTasks.add({
+            id: task.id,
+            task: task.task, 
+            status: task.status,
+            date: selectedDate
+        });
+
         setWorkTasks([
             ...workTasks,
             task
@@ -53,6 +64,10 @@ export default function Work({selectedDate}) {
     const handleWorkStatus = (id) => {
         setWorkTasks(workTasks.map((task) => {
             if (task.id === id) {
+                db.workTasks.update(id, {
+                    status: !task.status
+                });
+                console.log(id);
                 task.status = !task.status;
                 return task;
             } else {
@@ -61,13 +76,17 @@ export default function Work({selectedDate}) {
         }));
     }
 
-    const handleDeleteWorkTask = (id) => {
+    const handleDeleteWorkTask = async (id) => {
+        await db.workTasks.delete(id);
         setWorkTasks(workTasks.filter(task => task.id !== id));
     }
 
     const handleEditWorkTask = (editTask) => {
-        setWorkTasks(workTasks.map((task) => {
+        setWorkTasks(workTasks.map(async (task) => {
             if (task.id === editTask.id) {
+                await db.workTasks.update(task.id, {
+                    task: editTask.task
+                });
                 task.task=editTask.task;
                 return task;
             } else {
