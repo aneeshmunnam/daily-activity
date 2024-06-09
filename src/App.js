@@ -6,14 +6,8 @@ import Sweat from './components/Sweat';
 import Work from './components/Work';
 
 function App() {
-  // localStorage.clear();
 
-  // Set default date to tomorrow
-  const tommorow = new Date();
-  tommorow.setDate(new Date().getDate()+1);
-  const tommorowDate = tommorow.toISOString().split('T')[0];
-
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
 
   const handleDateChange = (selectedDateNav) => {
     setSelectedDate(selectedDateNav);

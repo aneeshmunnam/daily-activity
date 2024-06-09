@@ -1,39 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import TaskList from "../common/TaskList";
 import { db } from "../common/db";
-import { useLiveQuery } from "dexie-react-hooks";
 
 export default function Work({selectedDate}) {
-    console.log(useLiveQuery(() => db.workTasks.toArray()));
     const [workTasks, setWorkTasks] = useState([]);
 
     const workTask = useRef('');
 
-    // useEffect(() => {
-    //     const tasks = JSON.parse(localStorage.getItem("workTasksWithDate"));
-    //     if (tasks) {
-    //         setWorkTasks(tasks);
-    //     }
-    // }, []);
-
-    // useEffect(() => {
-    //     let selectedWorkTasks = localStorage.getItem("workTasksWithDate") ? 
-    //                 JSON.parse(localStorage.getItem("workTasksWithDate")) : [];
-    //     selectedWorkTasks.filter(task => task.date === selectedDate)
-    //     setWorkTasks(selectedWorkTasks);
-    // }, [selectedDate]);
-
-    // useEffect(() => {
-    //     if (workTasks.length > 0) {
-    //         let currentTasks = JSON.parse(localStorage.getItem("workTasksWithDate"));
-    //         if (currentTasks)
-    //             currentTasks.push(workTasks);
-    //         else 
-    //             currentTasks = workTasks;
-    //         localStorage.setItem("workTasksWithDate", JSON.stringify(currentTasks));
-    //     }
-    //     console.log(localStorage.getItem("workTasksWithDate"));
-    // }, [workTasks]);
+    useEffect(() => {
+        const fetchWorkTasks = async () => {
+            try {
+                const selectedWorkTasks = await db.workTasks.where("date").equals(selectedDate).toArray();
+                setWorkTasks(selectedWorkTasks);
+            } catch (error) {
+                console.log("Error fetching items for date" +selectedDate);
+            }
+        };
+        fetchWorkTasks();
+    }, [selectedDate]);
 
     const handleWork = async (e) => {
         if (workTask.current && workTask.current.length === 0) return;
@@ -67,7 +51,6 @@ export default function Work({selectedDate}) {
                 db.workTasks.update(id, {
                     status: !task.status
                 });
-                console.log(id);
                 task.status = !task.status;
                 return task;
             } else {
