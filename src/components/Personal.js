@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import TaskList from "../common/TaskList";
+import { db } from "../common/db";
 
 export default function Personal({selectedDate}) {
     const [personalTasks, setPersonalTasks] = useState([]);
@@ -7,17 +8,30 @@ export default function Personal({selectedDate}) {
     const personalTask = useRef('');
 
     useEffect(() => {
-        // Will pull data from rxdb
-        setPersonalTasks([]);
+        const fetchPersonalTasks = async () => {
+            try {
+                const selectedPersonalTasks = await db.personalTasks.where("date").equals(selectedDate).toArray();
+                setPersonalTasks(selectedPersonalTasks);
+            } catch (error) {
+                console.log("Error fetching items for date" +selectedDate);
+            }
+        };
+        fetchPersonalTasks();
     }, [selectedDate]);
 
-    const handlePersonal = (e) => {
+    const handlePersonal = async (e) => {
         if (personalTask && personalTask.current.length === 0) return;
         const task = {
             "id": Math.floor(Math.random() * 100000) + 1,
             "task": personalTask.current.value,
             "status": false
         };
+        await db.personalTasks.add({
+            id: task.id,
+            task: task.task,
+            status: task.status,
+            date: selectedDate
+        });
         setPersonalTasks([
             ...personalTasks,
             task
@@ -29,6 +43,9 @@ export default function Personal({selectedDate}) {
     const handlePersonalStatus = (id) => {
         setPersonalTasks(personalTasks.map((task) => {
             if (task.id === id) {
+                db.personalTasks.update(id, {
+                    status: !task.status
+                });
                 task.status = !task.status;
                 return task;
             } else {
@@ -37,7 +54,8 @@ export default function Personal({selectedDate}) {
         }));
     }
 
-    const handleDeletePersonalTask = (id) => {
+    const handleDeletePersonalTask = async (id) => {
+        await db.personalTasks.delete(id);
         setPersonalTasks(personalTasks.filter(task => task.id !== id));
     }
 
@@ -45,6 +63,9 @@ export default function Personal({selectedDate}) {
         setPersonalTasks(personalTasks.map((task) => {
             if (task.id === editTask.id) {
                 task.task=editTask.task;
+                db.personalTasks.update(task.id, {
+                    task : editTask.task
+                });
                 return task;
             } else {
                 return task;
