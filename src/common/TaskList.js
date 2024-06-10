@@ -30,6 +30,17 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                         })
                     }} />
                 </div>
+                {task.sweatType ? <div className="col-auto" key={index}>
+                    <input key={index+1} 
+                    className="form-control"
+                    value={task.weight} 
+                    onChange={(e) => {
+                        onEdit({
+                            ...task,
+                            weight: e.target.value
+                        })
+                    }} />
+                </div> : ''}
                 <div className="col-auto" key={index + 1}>
                     <div className="form-check form-switch">
                         <input key={index + 1} className="form-check-input"
@@ -52,6 +63,9 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                 <div className="col-3" key={index}>
                     <label key={index}>{task.task}</label>
                 </div>
+                {task.weight ? <div className="col-3" key={index}>
+                        <label key={index}>{task.weight}</label>
+                </div> : ''}
                 <div className="col-auto" key={index + 1}>
                     <div className="form-check form-switch">
                         <input key={index + 1} className="form-check-input"
