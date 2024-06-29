@@ -20,7 +20,7 @@ export default function Work({selectedDate}) {
     }, [selectedDate]);
 
     const handleWork = async (e) => {
-        if (workTask.current && workTask.current.length === 0) return;
+        if (workTask.current && workTask.current.length === undefined) return;
         const task = {
             "id": Math.floor(Math.random() * 100000) + 1,
             "task": workTask.current.value,
