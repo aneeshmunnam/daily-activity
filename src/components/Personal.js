@@ -20,7 +20,7 @@ export default function Personal({selectedDate}) {
     }, [selectedDate]);
 
     const handlePersonal = async (e) => {
-        if (personalTask && personalTask.current.length === undefined) return;
+        if (personalTask && personalTask.current.value.length === 0) return;
         const task = {
             "id": Math.floor(Math.random() * 100000) + 1,
             "task": personalTask.current.value,

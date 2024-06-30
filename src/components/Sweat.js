@@ -22,9 +22,8 @@ export default function Sweat({selectedDate}) {
     }, [selectedDate]);
 
     const handleSweat = async (e) => {
-        console.log(workout.current.length);
-        if ((workout.current && workout.current.length === undefined) || 
-                        (weight.current && weight.current.length === undefined)) return;
+        if ((workout.current && workout.current.value.length === 0) || 
+                        (weight.current && weight.current.value.length === 0)) return;
         const sweatTask = {
             "id": Math.floor(Math.random() * 100000) + 1,
             "task": workout.current.value,
@@ -93,17 +92,17 @@ export default function Sweat({selectedDate}) {
         <div className="sweat">
             <h2>Sweaty</h2>
             <div className="row">
-                <div className="col-4">
+                <div className="col-6">
                     <input type="text"
                     className="form-control"
                     ref={workout}
                     placeholder="Workout" />
                 </div>
-                <div className="col-4">
+                <div className="col-3">
                     <input type="text" 
                     ref={weight}
                     className="form-control"
-                    placeholder="Weight" />
+                    placeholder="Weight/Reps" />
                 </div>
                 <div className="col">
                     <label>
