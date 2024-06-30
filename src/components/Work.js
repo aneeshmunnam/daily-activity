@@ -39,8 +39,6 @@ export default function Work({selectedDate}) {
             ...workTasks,
             task
         ]);
-        // workTasks.push(task);
-        // localStorage.setItem("workTasksWithDate", JSON.stringify(workTasks));
         workTask.current.value = '';
         e.preventDefault();
     };
@@ -82,14 +80,16 @@ export default function Work({selectedDate}) {
         <div>
             <h2 key="header">Work</h2>
             <div className="row mb-4">
-                <div className="col-auto">
+                <div className="col-10">
                     <input type="text" 
                     className="form-control"
                     ref={workTask}
                     placeholder="Take a work task" />
                 </div>
                 <div className="col-auto">
-                    <button className="btn btn-primary" onClick={handleWork}>Work task</button>
+                    <button className="btn btn-primary" onClick={handleWork}>
+                    <i className="bi bi-plus-square-fill"></i>
+                    </button>
                 </div>
             </div>
             <TaskList tasks={workTasks} 

@@ -77,14 +77,16 @@ export default function Personal({selectedDate}) {
         <div>
             <h2 key="header">Personal</h2>
             <div className="row mb-4">
-                <div className="col-auto">
+                <div className="col-10">
                     <input type="text" 
                     className="form-control"
                     ref={personalTask}
                     placeholder="Take a personal task" />
                 </div>
                 <div className="col-auto">
-                    <button className="btn btn-primary" onClick={handlePersonal}>Personal task</button>
+                    <button className="btn btn-primary" onClick={handlePersonal}>
+                        <i className="bi bi-plus-square-fill"></i>
+                    </button>
                 </div>
             </div>
             <TaskList tasks={personalTasks} 

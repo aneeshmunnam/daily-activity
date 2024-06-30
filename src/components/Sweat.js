@@ -93,20 +93,27 @@ export default function Sweat({selectedDate}) {
         <div className="sweat">
             <h2>Sweaty</h2>
             <div className="row">
-                <div className="col">
+                <div className="col-4">
                     <input type="text"
                     className="form-control"
                     ref={workout}
                     placeholder="Workout" />
                 </div>
-                <div className="col">
+                <div className="col-4">
                     <input type="text" 
                     ref={weight}
                     className="form-control"
                     placeholder="Weight" />
                 </div>
                 <div className="col">
-                    <button className="btn btn-primary" onClick={handleSweat}>Add Workout</button>
+                    <label>
+                        <input type="checkbox" name="warmup" />
+                    </label>
+                </div>
+                <div className="col">
+                    <button className="btn btn-primary" onClick={handleSweat}>
+                        <i className="bi bi-plus-square-fill"></i>
+                    </button>
                 </div>
             </div>
             <br />
