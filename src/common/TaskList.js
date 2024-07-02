@@ -31,7 +31,7 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                     }} />
                 </div>
                 {task.sweatType ? <div className="col-auto" key={index}>
-                    <input key={index+1} 
+                    <input key={`weight-${index+1}`}
                     className="form-control"
                     value={task.weight} 
                     onChange={(e) => {
@@ -41,10 +41,10 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                         })
                     }} />
                 </div> : ''}
-                <div className="col-auto" key={index + 1}>
+                <div className="col-auto" key={`status-${index + 1}`}>
                     <div className="form-check form-switch">
-                        <input key={index + 1} className="form-check-input"
-                            type="checkbox" id="flexSwitchCheckDefault" name={task.id}
+                        <input key={`status-${index + 1}`} className="form-check-input"
+                            type="checkbox" name={task.id}
                             value={task.status}
                             onChange={() => onHandle(task.id)} />
                     </div>
@@ -63,12 +63,12 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                 <div className="col-3" key={index}>
                     <label key={index}>{task.task}</label>
                 </div>
-                {task.weight ? <div className="col-3" key={index}>
+                {task.weight ? <div className="col-3" key={`weight-${index+1}`}>
                         <label key={index}>{task.weight}</label>
                 </div> : ''}
-                <div className="col-auto" key={index + 1}>
+                <div className="col-auto" key={`status-${index + 1}`}>
                     <div className="form-check form-switch">
-                        <input key={index + 1} className="form-check-input"
+                        <input key={`status-${index + 1}`} className="form-check-input"
                             type="checkbox" id="flexSwitchCheckDefault" name={task.id}
                             value={task.status}
                             onChange={() => onHandle(task.id)} />
