@@ -19,6 +19,14 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
     if (editing) {
         editTask = (
             <>
+                {task.warmup ? 
+                    <div className="col-auto" key={`warmup-${index+1}`}>
+                        <b>W</b>
+                    </div> : 
+                    <div className="col-auto" key={`warmup-${index+1}`}>
+                        <b>G</b>
+                    </div>
+                }
                 <div className="col-auto" key={index}>
                     <input key={index+1} 
                     className="form-control"
@@ -60,6 +68,14 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
     } else {
         editTask = (
             <>
+                {task.warmup ? 
+                    <div className="col-auto" key={`warmup-${index+1}`}>
+                        <b>W</b>
+                    </div> : 
+                    <div className="col-auto" key={`warmup-${index+1}`}>
+                        <b>G</b>
+                    </div>
+                }
                 <div className="col-3" key={index}>
                     <label key={index}>{task.task}</label>
                 </div>
