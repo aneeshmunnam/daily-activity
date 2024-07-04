@@ -24,11 +24,12 @@ export default function Sweat({selectedDate}) {
 
     const handleSweat = async (e) => {
         if ((workout.current && workout.current.value.length === 0) || 
-                        (weight.current && weight.current.value.length === 0)) return;
+                        (weight.current && weight.current.value.length === 0 
+                            && !warmup.current.checked)) return;
         const sweatTask = {
             "id": Math.floor(Math.random() * 100000) + 1,
             "task": workout.current.value,
-            "weight": weight.current.value,
+            "weight": weight.current.value.length === 0  ? ' ' : weight.current.value,
             "status": false,
             "sweatType": true,
             "warmup": warmup.current.checked
