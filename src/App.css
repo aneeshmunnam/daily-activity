@@ -25,6 +25,25 @@
   padding:1rem;
 }
 
+.warmup {
+  position: relative;
+  display: inline-block;
+}
+
+.warmup .warmup-tooltip-message {
+  visibility: hidden;
+
+  position: absolute;
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -30px; 
+}
+
+.warmup:hover .warmup-tooltip-message {
+  visibility: visible;
+}
+
 @media (min-width:768px) {
   .responsive-three-column-grid {
       display: grid;

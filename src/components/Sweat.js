@@ -112,13 +112,18 @@ export default function Sweat({selectedDate}) {
                     placeholder="Lbs/Reps" />
                 </div>
                 <div className="col">
-                    <div className="form-check form-switch">
-                        <input className="form-check-input"
-                            key="warmup"
-                            type="checkbox" id="warmupCheckDefault" 
-                            name="warmup"
-                            ref={warmup} 
-                            defaultChecked = {false} />
+                    <div className="warmup">
+                        <div className="form-check form-switch">
+                            <input className="form-check-input"
+                                key="warmup"
+                                type="checkbox" id="warmupCheckDefault" 
+                                name="warmup"
+                                ref={warmup} 
+                                defaultChecked = {false} />
+                            <b className="warmup-tooltip-message">
+                                Warmup
+                            </b>
+                        </div>
                     </div>
                 </div>
                 <div className="col">
