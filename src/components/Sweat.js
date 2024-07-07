@@ -6,7 +6,6 @@ export default function Sweat({selectedDate}) {
 
     const workout = useRef('');
     const weight = useRef('');
-    const warmup = useRef(null);
 
     const [sweats, setSweats] = useState([]);
 
@@ -24,23 +23,20 @@ export default function Sweat({selectedDate}) {
 
     const handleSweat = async (e) => {
         if ((workout.current && workout.current.value.length === 0) || 
-                        (weight.current && weight.current.value.length === 0 
-                            && !warmup.current.checked)) return;
+                        (weight.current && weight.current.value.length === 0)) return;
         const sweatTask = {
             "id": Math.floor(Math.random() * 100000) + 1,
             "task": workout.current.value,
             "weight": weight.current.value.length === 0  ? ' ' : weight.current.value,
             "status": false,
-            "sweatType": true,
-            "warmup": warmup.current.checked
+            "sweatType": true
         };
         await db.sweatTasks.add({
             id: sweatTask.id,
             task: sweatTask.task,
             weight: sweatTask.weight,
             status: sweatTask.status,
-            date: selectedDate,
-            warmup: warmup.current.checked
+            date: selectedDate
         });
         setSweats([
             ...sweats,
@@ -48,7 +44,6 @@ export default function Sweat({selectedDate}) {
         ]);
         workout.current.value = '';
         weight.current.value = '';
-        warmup.current.checked = false;
         e.preventDefault();
     };
 
@@ -110,21 +105,6 @@ export default function Sweat({selectedDate}) {
                     ref={weight}
                     className="form-control"
                     placeholder="Lbs/Reps" />
-                </div>
-                <div className="col">
-                    <div className="warmup">
-                        <div className="form-check form-switch">
-                            <input className="form-check-input"
-                                key="warmup"
-                                type="checkbox" id="warmupCheckDefault" 
-                                name="warmup"
-                                ref={warmup} 
-                                defaultChecked = {false} />
-                            <b className="warmup-tooltip-message">
-                                Warmup
-                            </b>
-                        </div>
-                    </div>
                 </div>
                 <div className="col">
                     <button className="btn btn-primary" onClick={handleSweat}>
