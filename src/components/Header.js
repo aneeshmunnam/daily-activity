@@ -17,12 +17,22 @@ export default function Header({onDateChange}) {
         <>
             <nav className="navbar navbar-expand-lg bg-success">
                 <div className="container-fluid">
+                    <a class="navbar-brand" href="#">Daily App</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" 
                         data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
                         aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <h1>Daily App</h1>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" href="#">Workout</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" href="#">Groceries</a>
+                            </li>
+                        </ul>
+                    </div>
                     <div className="d-flex">
                         <input type="date" value={date} 
                         className="form-control"
