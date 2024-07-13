@@ -6,6 +6,7 @@ export default function Sweat({selectedDate}) {
 
     const workout = useRef('');
     const weight = useRef('');
+    const selectedWokoutType = useRef('');
 
     const [sweats, setSweats] = useState([]);
 
@@ -91,6 +92,15 @@ export default function Sweat({selectedDate}) {
     return (
         <div className="sweat">
             <h2>Sweaty</h2>
+            <div>
+                <select className="form-select" aria-label="Default select example" ref={selectedWokoutType}>
+                    <option >Select Workout Type</option>
+                    <option value="AMRAP">AMRAP</option>
+                    <option value="EMOM">EMOM</option>
+                    <option value="E2MO2M">E2MO2M</option>
+                    <option value="E3MO3M">E3MO3M</option>
+                </select>
+            </div>
             <div className="row">
                 <div className="col-5">
                     <input type="text"
