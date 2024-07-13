@@ -3,6 +3,7 @@ import TaskList from "../common/TaskList";
 
 export default function Warmup({selectedDate}) {
 
+    const noOfRounds = useRef(0);
     const workout = useRef('');
     const weight = useRef('');
 
@@ -83,6 +84,17 @@ export default function Warmup({selectedDate}) {
     return (
         <div>
             <h2>Warmup</h2>
+            <div className="row">
+                <div className="col-9">
+                    <input type="text"
+                    key="numberofRounds" 
+                    className="form-control"
+                    ref={noOfRounds}
+                    placeholder="No of Rounds"
+                    />
+                </div>
+            </div>
+            <br />
             <div className="row">
                 <div className="col-5">
                     <input type="text"
