@@ -5,7 +5,8 @@ import { db } from "../common/db";
 export default function Sweat({selectedDate}) {
 
     const workout = useRef('');
-    const weight = useRef('');
+    const weight = useRef(0);
+    const reps = useRef(0);
     const selectedWokoutType = useRef('');
 
     const [sweats, setSweats] = useState([]);
@@ -30,6 +31,7 @@ export default function Sweat({selectedDate}) {
             "task": workout.current.value,
             "weight": weight.current.value.length === 0  ? ' ' : weight.current.value,
             "status": false,
+            "reps": reps.current.value.length === 0 ? ' ' : weight.current.value,
             "sweatType": true
         };
         await db.sweatTasks.add({
@@ -93,7 +95,8 @@ export default function Sweat({selectedDate}) {
         <div className="sweat">
             <h2>Sweaty</h2>
             <div>
-                <select className="form-select" aria-label="Default select example" ref={selectedWokoutType}>
+                <select className="form-select"
+                aria-label="Default select example" ref={selectedWokoutType}>
                     <option >Select Workout Type</option>
                     <option value="AMRAP">AMRAP</option>
                     <option value="EMOM">EMOM</option>
@@ -109,12 +112,20 @@ export default function Sweat({selectedDate}) {
                     ref={workout}
                     placeholder="Workout" />
                 </div>
-                <div className="col-3">
+                <div className="col-2">
                     <input type="text" 
                     key="weight"
                     ref={weight}
                     className="form-control"
-                    placeholder="Lbs/Reps" />
+                    placeholder="Lbs" />
+                </div>
+                <div className="col-2">
+                    <input type="text" 
+                    key="reps"
+                    className="form-control"
+                    placeholder="reps"
+                    ref={reps}
+                    />
                 </div>
                 <div className="col">
                     <button className="btn btn-primary" onClick={handleSweat}>
