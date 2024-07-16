@@ -44,6 +44,16 @@
   visibility: visible;
 }
 
+.heading-size {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.weight-reps-footer {
+  font-size: 12px;
+  font-style: oblique;
+}
+
 @media (min-width:768px) {
   .responsive-three-column-grid {
       display: grid;

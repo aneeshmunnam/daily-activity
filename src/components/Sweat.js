@@ -39,6 +39,7 @@ export default function Sweat({selectedDate}) {
             task: sweatTask.task,
             weight: sweatTask.weight,
             status: sweatTask.status,
+            reps: sweatTask.reps,
             date: selectedDate
         });
         setSweats([

@@ -63,12 +63,12 @@ export default function Work({selectedDate}) {
     }
 
     const handleEditWorkTask = (editTask) => {
-        setWorkTasks(workTasks.map(async (task) => {
+        setWorkTasks(workTasks.map((task) => {
             if (task.id === editTask.id) {
-                await db.workTasks.update(task.id, {
+                task.task=editTask.task;
+                db.workTasks.update(task.id, {
                     task: editTask.task
                 });
-                task.task=editTask.task;
                 return task;
             } else {
                 return task;
