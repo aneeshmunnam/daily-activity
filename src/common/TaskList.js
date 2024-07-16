@@ -19,7 +19,7 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
     if (editing) {
         editTask = (
             <>
-                <div className="col-auto" key={index}>
+                <div className="col-auto" key={`task-${index+1}`}>
                     <input key={index+1} 
                     className="form-control"
                     value={task.task} 
@@ -30,7 +30,7 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                         })
                     }} />
                 </div>
-                {task.sweatType ? <div className="col-auto" key={index}>
+                {task.sweatType ? <div className="col-auto" key={`weight-${index+1}`}>
                     <input key={`weight-${index+1}`}
                     className="form-control"
                     value={task.weight} 
@@ -66,7 +66,7 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
         editTask = (
             <>
                 <div className="row">
-                    <div className="col-6" key={index}>
+                    <div className="col-6" key={`task-${index + 1}`}>
                         <label key={index} className="heading-size">
                             <b>
                                 {task.task}

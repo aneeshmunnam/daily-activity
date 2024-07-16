@@ -31,7 +31,7 @@ export default function Sweat({selectedDate}) {
             "task": workout.current.value,
             "weight": weight.current.value.length === 0  ? ' ' : weight.current.value,
             "status": false,
-            "reps": reps.current.value.length === 0 ? ' ' : weight.current.value,
+            "reps": reps.current.value.length === 0 ? ' ' : reps.current.value,
             "sweatType": true
         };
         await db.sweatTasks.add({
@@ -48,6 +48,7 @@ export default function Sweat({selectedDate}) {
         ]);
         workout.current.value = '';
         weight.current.value = '';
+        reps.current.value = '';
         e.preventDefault();
     };
 
@@ -97,7 +98,7 @@ export default function Sweat({selectedDate}) {
             <h2>Sweaty</h2>
             <div>
                 <select className="form-select"
-                aria-label="Default select example" ref={selectedWokoutType}>
+                    aria-label="Default select example" ref={selectedWokoutType}>
                     <option >Select Workout Type</option>
                     <option value="AMRAP">AMRAP</option>
                     <option value="EMOM">EMOM</option>
