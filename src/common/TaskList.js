@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function TaskList({tasks, handleStatus, handleDeleteTask, handleEditTask}) {
     return (
-        <div>
+        <div className="mt-3">
             {tasks.map((task, index) => (
                 <div className="row mb-4" key={index}>
                     <Task task={task} onEdit={handleEditTask} onHandle={handleStatus} 

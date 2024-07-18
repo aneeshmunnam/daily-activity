@@ -7,7 +7,7 @@ export default function Sweat({selectedDate}) {
     const workout = useRef('');
     const weight = useRef(0);
     const reps = useRef(0);
-    const selectedWokoutType = useRef('');
+    const selectedWokoutType = useState('');
 
     const [sweats, setSweats] = useState([]);
 
@@ -96,46 +96,47 @@ export default function Sweat({selectedDate}) {
     return (
         <div className="sweat">
             <h2>Sweaty</h2>
-            <div>
-                <select className="form-select"
-                    aria-label="Default select example" ref={selectedWokoutType}>
-                    <option >Select Workout Type</option>
-                    <option value="AMRAP">AMRAP</option>
-                    <option value="EMOM">EMOM</option>
-                    <option value="E2MO2M">E2MO2M</option>
-                    <option value="E3MO3M">E3MO3M</option>
-                </select>
-            </div>
-            <div className="row">
-                <div className="col-5">
-                    <input type="text"
-                    key="workout"
-                    className="form-control"
-                    ref={workout}
-                    placeholder="Workout" />
+                <div className="row mt-3">
+                    <div className="col-7">
+                        <select className="form-select"
+                            aria-label="Default select example" value={selectedWokoutType}>
+                            <option >Select Workout Type</option>
+                            <option value="AMRAP">AMRAP</option>
+                            <option value="EMOM">EMOM</option>
+                            <option value="E2MO2M">E2MO2M</option>
+                            <option value="E3MO3M">E3MO3M</option>
+                        </select>
+                    </div>
                 </div>
-                <div className="col-2">
-                    <input type="text" 
-                    key="weight"
-                    ref={weight}
-                    className="form-control"
-                    placeholder="Lbs" />
+                <div className="row mt-3">
+                    <div className="col-5">
+                        <input type="text"
+                        key="workout"
+                        className="form-control"
+                        ref={workout}
+                        placeholder="Workout" />
+                    </div>
+                    <div className="col-2">
+                        <input type="text" 
+                        key="weight"
+                        ref={weight}
+                        className="form-control"
+                        placeholder="Lbs" />
+                    </div>
+                    <div className="col-2">
+                        <input type="text" 
+                        key="reps"
+                        className="form-control"
+                        placeholder="reps"
+                        ref={reps}
+                        />
+                    </div>
+                    <div className="col">
+                        <button className="btn btn-primary" onClick={handleSweat}>
+                            <i className="bi bi-plus-square-fill"></i>
+                        </button>
+                    </div>
                 </div>
-                <div className="col-2">
-                    <input type="text" 
-                    key="reps"
-                    className="form-control"
-                    placeholder="reps"
-                    ref={reps}
-                    />
-                </div>
-                <div className="col">
-                    <button className="btn btn-primary" onClick={handleSweat}>
-                        <i className="bi bi-plus-square-fill"></i>
-                    </button>
-                </div>
-            </div>
-            <br />
             <TaskList tasks={sweats} 
                     handleStatus={handleWorkoutStatus} 
                     handleDeleteTask={handleDeleteWorkoutTask} 
