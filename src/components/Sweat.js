@@ -7,8 +7,7 @@ export default function Sweat({selectedDate}) {
     const workout = useRef('');
     const weight = useRef(0);
     const reps = useRef(0);
-    const workoutType = useRef('');
-    const nor = useRef(0);
+    const [workoutType, setWorkoutType] = useState('');
 
     const [sweats, setSweats] = useState([]);
 
@@ -100,22 +99,17 @@ export default function Sweat({selectedDate}) {
                 <div className="row mt-3">
                     <div className="col-6">
                         <select className="form-select"
-                            aria-label="Default select example" ref={workoutType}>
-                            <option >Select Workout Type</option>
+                            aria-label="Default select example" value={workoutType} 
+                            onChange={e => setWorkoutType(e.target.value)}>
+                            <option value="Select">Select Workout Type</option>
                             <option value="AMRAP">AMRAP</option>
                             <option value="EMOM">EMOM</option>
                             <option value="E2MO2M">E2MO2M</option>
                             <option value="E3MO3M">E3MO3M</option>
                         </select>
                     </div>
-                    <div className="col-3">
-                        <input type="text" key="nor" className="form-control" 
-                        ref={nor}
-                        placeholder="Rounds"
-                        />
-                    </div>
                 </div>
-                <div className="row mt-3">
+                {workoutType ? <div className="row mt-3">
                     <div className="col-5">
                         <input type="text"
                         key="workout"
@@ -143,7 +137,7 @@ export default function Sweat({selectedDate}) {
                             <i className="bi bi-plus-square-fill"></i>
                         </button>
                     </div>
-                </div>
+                </div> : ''}
             <TaskList tasks={sweats} 
                     handleStatus={handleWorkoutStatus} 
                     handleDeleteTask={handleDeleteWorkoutTask} 
