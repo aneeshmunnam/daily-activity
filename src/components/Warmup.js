@@ -1,50 +1,53 @@
 import { useEffect, useRef, useState } from "react"
 import TaskList from "../common/TaskList";
+import { db } from "../common/db";
 
 export default function Warmup({selectedDate}) {
 
     const workout = useRef('');
-    const weight = useRef('');
 
     const [warmups, setWarmups] = useState([]);
 
     useEffect(() => {
-        // const fetchSweats = async () => {
-        //     try {
-        //         const selectedWorkTasks = await db.sweatTasks.where("date").equals(selectedDate).toArray();
-        //         setSweats(selectedWorkTasks);
-        //     } catch (error) {
-        //         console.log("Error fetching items for date" +selectedDate);
-        //     }
-        // };
-        // fetchSweats();
+        const fetchWarmups = async () => {
+            try {
+                const selectedWorkTasks = await db.warmupTasks.where("date").equals(selectedDate).toArray();
+                setWarmups(selectedWorkTasks);
+            } catch (error) {
+                console.log("Error fetching items for date" +selectedDate);
+            }
+        };
+        fetchWarmups();
         console.log("date changed"+selectedDate);
     }, [selectedDate]);
 
-    const handleWarmup = (e) => {
+    const handleWarmup = async (e) => {
         if (workout.current && workout.current.length === 0) return;
         const warmupTask = {
             "id": Math.floor(Math.random() * 100000) + 1,
             "task": workout.current.value,
-            "weight": weight.current.value.length === 0  ? ' ' : weight.current.value,
             "status": false
         };
+        await db.warmupTasks.add({
+            id: warmupTask.id,
+            task: warmupTask.task,
+            status: warmupTask.status,
+            date: selectedDate
+        });
         setWarmups([
             ...warmups,
             warmupTask
         ]);
         workout.current.value = "";
-        weight.current.value = "";
-        console.log(warmups);
         e.preventDefault();
     };
 
     const handleWorkoutStatus = (id) => {
         setWarmups(warmups.map((task) => {
             if (task.id === id) {
-                // db.sweatTasks.update(id, {
-                //     status: !task.status
-                // });
+                db.warmupTasks.update(id, {
+                    status: !task.status
+                });
                 task.status = !task.status;
                 return task;
             } else {
@@ -53,25 +56,19 @@ export default function Warmup({selectedDate}) {
         }));
     }
 
-    const handleDeleteWorkoutTask = (id) => {
-        // await db.sweatTasks.delete(id);
+    const handleDeleteWorkoutTask = async (id) => {
+        await db.warmupTasks.delete(id);
         setWarmups(warmups.filter(task => task.id !== id));
-    }
+    };
 
     const handleEditWorkoutTask = (editTask) => {
         setWarmups(warmups.map((task) => {
             if (task.id === editTask.id) {
                 if (task.task !== editTask.task) {
-                    // db.sweatTasks.update(task.id, {
-                    //     task: editTask.task
-                    // });
+                    db.warmupTasks.update(task.id, {
+                        task: editTask.task
+                    });
                     task.task=editTask.task;
-                }
-                if (task.weight !== editTask.weight) {
-                    // db.sweatTasks.update(task.id, {
-                    //     weight: editTask.weight
-                    // });
-                    task.weight = editTask.weight;
                 }
                 return task;
             } else {
@@ -85,23 +82,17 @@ export default function Warmup({selectedDate}) {
             <h2>Warmup</h2>
             <br />
             <div className="row">
-                <div className="col-5">
-                    <input type="text"
-                    key="workout"
-                    className="form-control"
-                    ref={workout}
-                    placeholder="Workout" />
-                </div>
-                <div className="col-4">
-                    <input type="text" 
-                    key="weight"
-                    ref={weight}
-                    className="form-control"
-                    placeholder="Lbs/Reps - Optional" />
+                <div className="col-9">
+                    <textarea
+                        key="workout"
+                        className="form-control w-100 textarea-height"
+                        ref={workout}
+                        placeholder="Add warmup tasks" 
+                        id="warmupTextarea" />
                 </div>
                 <div className="col">
-                    <button className="btn btn-primary" onClick={handleWarmup}>
-                        <i className="bi bi-plus-square-fill"></i>
+                    <button className="btn btn-primary btn-lg" onClick={handleWarmup}>
+                        <i>Before</i>
                     </button>
                 </div>
             </div>

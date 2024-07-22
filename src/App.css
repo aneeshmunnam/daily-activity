@@ -14,7 +14,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-bottom: 20px;
-  height: 100vh;
+  height: 150vh;
 }
 
 .responsive-three-column-grid {
@@ -54,7 +54,11 @@
   font-style: oblique;
 }
 
-@media (min-width:768px) {
+.textarea-height {
+  height: 150px;
+}
+
+@media (min-width:1000px) {
   .responsive-three-column-grid {
       display: grid;
       grid-auto-rows: 1fr;
