@@ -22,17 +22,22 @@ export default function Warmup({selectedDate}) {
     }, [selectedDate]);
 
     const handleWarmup = async (e) => {
-        if (workout.current && workout.current.length === 0) return;
+        if (workout.current && workout.current.value.length === 0) {
+            alert("Please provide details for warmup.");
+            return;
+        }
         const warmupTask = {
             "id": Math.floor(Math.random() * 100000) + 1,
             "task": workout.current.value,
-            "status": false
+            "status": false,
+            "warmup": true
         };
         await db.warmupTasks.add({
             id: warmupTask.id,
             task: warmupTask.task,
             status: warmupTask.status,
-            date: selectedDate
+            date: selectedDate,
+            warmup: warmupTask.warmup
         });
         setWarmups([
             ...warmups,
@@ -92,7 +97,7 @@ export default function Warmup({selectedDate}) {
                 </div>
                 <div className="col">
                     <button className="btn btn-primary btn-lg" onClick={handleWarmup}>
-                        <i>Before</i>
+                        <i>Before Workout</i>
                     </button>
                 </div>
             </div>

@@ -19,6 +19,19 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
     if (editing) {
         editTask = (
             <>
+                {task.warmup ? 
+                <div className="col-auto" key={`task-${index+1}`}>
+                    <textarea key={index+1} 
+                    className="form-control w-100 textarea-height"
+                    value={task.task} 
+                    onChange={(e) => {
+                        onEdit({
+                            ...task,
+                            task: e.target.value
+                        })
+                    }} />
+                </div>
+                :
                 <div className="col-auto" key={`task-${index+1}`}>
                     <input key={index+1} 
                     className="form-control"
@@ -29,7 +42,7 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                             task: e.target.value
                         })
                     }} />
-                </div>
+                </div>}
                 {task.sweatType ? <div className="col-auto" key={`weight-${index+1}`}>
                     <input key={`weight-${index+1}`}
                     className="form-control"
@@ -68,9 +81,9 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                 <div className="row">
                     <div className="col-6" key={`task-${index + 1}`}>
                         <label key={index} className="heading-size">
-                            <b>
+                            <pre>
                                 {task.task}
-                            </b>
+                            </pre>
                         </label>
                     </div>
                     <div className="col-auto" key={`status-${index + 1}`}>
