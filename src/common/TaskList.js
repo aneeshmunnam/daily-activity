@@ -20,7 +20,7 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
         editTask = (
             <>
                 {task.warmup ? 
-                <div className="col-auto" key={`task-${index+1}`}>
+                <div className="col-9" key={`task-${index+1}`}>
                     <textarea key={index+1} 
                     className="form-control w-100 textarea-height"
                     value={task.task} 
@@ -67,11 +67,6 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                         onClick={() => setEditing(false)}>
                         <i className="bi bi-save"></i>
                     </button>
-                </div>
-                <div className="col-auto">
-                            <button className="btn btn-danger" key={index+1} name={task.id} onClick={() => onDelete(task.id)}>
-                                <i className="bi bi-trash"></i>
-                            </button>
                 </div>
             </>
         )

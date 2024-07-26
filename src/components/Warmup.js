@@ -18,7 +18,6 @@ export default function Warmup({selectedDate}) {
             }
         };
         fetchWarmups();
-        console.log("date changed"+selectedDate);
     }, [selectedDate]);
 
     const handleWarmup = async (e) => {
