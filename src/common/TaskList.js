@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useState } from "react";
 
 export default function TaskList({tasks, handleStatus, handleDeleteTask, handleEditTask}) {
@@ -16,6 +17,16 @@ export default function TaskList({tasks, handleStatus, handleDeleteTask, handleE
 function Task({task, onEdit, onHandle, index, onDelete}) {
     const [editing, setEditing] = useState(false);
     let editTask = null;
+    const editTaskValue = useRef('');
+
+    const editTaskWarmup = () => {
+        onEdit({
+            ...task,
+            task: editTaskValue.current.value
+        });
+        setEditing(false);
+    };
+
     if (editing) {
         editTask = (
             <>
