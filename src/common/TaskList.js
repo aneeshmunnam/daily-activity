@@ -18,7 +18,7 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
     const [editing, setEditing] = useState(false);
     let editTask = null;
     const editTaskValue = useRef('');
-
+    console.log(editTaskValue);
     const editTaskWarmup = () => {
         onEdit({
             ...task,
@@ -27,32 +27,25 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
         setEditing(false);
     };
 
+    const cancel = () => {
+        editTaskValue.current.value = task.task;
+        setEditing(false);
+    };
+
     if (editing) {
         editTask = (
             <>
                 {task.warmup ? 
-                <div className="col-9" key={`task-${index+1}`}>
+                <div className="col-8" key={`task-${index+1}`}>
                     <textarea key={index+1} 
                     className="form-control w-100 textarea-height"
-                    value={task.task} 
-                    onChange={(e) => {
-                        onEdit({
-                            ...task,
-                            task: e.target.value
-                        })
-                    }} />
+                    ref={editTaskValue} />
                 </div>
                 :
                 <div className="col-auto" key={`task-${index+1}`}>
                     <input key={index+1} 
                     className="form-control"
-                    value={task.task} 
-                    onChange={(e) => {
-                        onEdit({
-                            ...task,
-                            task: e.target.value
-                        })
-                    }} />
+                    ref={editTaskValue} />
                 </div>}
                 {task.sweatType ? <div className="col-auto" key={`weight-${index+1}`}>
                     <input key={`weight-${index+1}`}
@@ -75,8 +68,14 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                 </div>
                 <div className="col-auto">
                     <button className="btn btn-secondary" key={index + 1} name={task.id}
-                        onClick={() => setEditing(false)}>
+                        onClick={editTaskWarmup}>
                         <i className="bi bi-save"></i>
+                    </button>
+                </div>
+                <div className="col-auto">
+                <button className="btn btn-secondary" key={index + 1} name={task.id}
+                        onClick={cancel}>
+                        <i class="bi bi-twitter-x"></i>
                     </button>
                 </div>
             </>
