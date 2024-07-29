@@ -39,13 +39,13 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                 <div className="col-8" key={`task-${index+1}`}>
                     <textarea key={index+1} 
                     className="form-control w-100 textarea-height"
-                    ref={editTaskValue} />
+                    ref={editTaskValue} defaultValue={task.task} />
                 </div>
                 :
                 <div className="col-auto" key={`task-${index+1}`}>
                     <input key={index+1} 
                     className="form-control"
-                    ref={editTaskValue} />
+                    ref={editTaskValue} defaultValue={task.task} />
                 </div>}
                 {task.sweatType ? <div className="col-auto" key={`weight-${index+1}`}>
                     <input key={`weight-${index+1}`}
