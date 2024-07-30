@@ -7,7 +7,8 @@ export default function Sweat({selectedDate}) {
     const workout = useRef('');
     const weight = useRef(0);
     const reps = useRef(0);
-    const [workoutType, setWorkoutType] = useState('');
+    const workoutType = useRef('');
+    const noofrounds = useRef(0);
 
     const [sweats, setSweats] = useState([]);
 
@@ -99,8 +100,7 @@ export default function Sweat({selectedDate}) {
                 <div className="row mt-3">
                     <div className="col-6">
                         <select className="form-select"
-                            aria-label="Default select example" value={workoutType} 
-                            onChange={e => setWorkoutType(e.target.value)}>
+                            aria-label="Default select example" ref={workoutType}>
                             <option value="Select">Select Workout Type</option>
                             <option value="AMRAP">AMRAP</option>
                             <option value="EMOM">EMOM</option>
@@ -108,8 +108,16 @@ export default function Sweat({selectedDate}) {
                             <option value="E3MO3M">E3MO3M</option>
                         </select>
                     </div>
+                    <div className="col-auto">
+                        <input type="text" 
+                        key="NumberOfRounds" 
+                        className="form-control"
+                        ref={noofrounds}
+                        placeholder="Number of Rounds"
+                        />
+                    </div>
                 </div>
-                {workoutType ? <div className="row mt-3">
+                <div className="row mt-3">
                     <div className="col-5">
                         <input type="text"
                         key="workout"
@@ -137,7 +145,7 @@ export default function Sweat({selectedDate}) {
                             <i className="bi bi-plus-square-fill"></i>
                         </button>
                     </div>
-                </div> : ''}
+                </div>
             <TaskList tasks={sweats} 
                     handleStatus={handleWorkoutStatus} 
                     handleDeleteTask={handleDeleteWorkoutTask} 

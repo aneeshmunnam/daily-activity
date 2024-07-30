@@ -75,7 +75,7 @@ function Task({task, onEdit, onHandle, index, onDelete}) {
                 <div className="col-auto">
                 <button className="btn btn-secondary" key={index + 1} name={task.id}
                         onClick={cancel}>
-                        <i class="bi bi-twitter-x"></i>
+                        <i className="bi bi-twitter-x"></i>
                     </button>
                 </div>
             </>
