@@ -8,7 +8,7 @@ export default function Sweat({selectedDate}) {
     const weight = useRef(0);
     const reps = useRef(0);
     const workoutType = useRef('');
-    const noofrounds = useRef(0);
+    const time = useRef('');
 
     const [sweats, setSweats] = useState([]);
 
@@ -108,14 +108,6 @@ export default function Sweat({selectedDate}) {
                             <option value="E3MO3M">E3MO3M</option>
                         </select>
                     </div>
-                    <div className="col-auto">
-                        <input type="text" 
-                        key="NumberOfRounds" 
-                        className="form-control"
-                        ref={noofrounds}
-                        placeholder="Number of Rounds"
-                        />
-                    </div>
                 </div>
                 <div className="row mt-3">
                     <div className="col-5">
@@ -150,6 +142,16 @@ export default function Sweat({selectedDate}) {
                     handleStatus={handleWorkoutStatus} 
                     handleDeleteTask={handleDeleteWorkoutTask} 
                     handleEditTask={handleEditWorkoutTask} />
+            <div className="row">
+                <div className="col-6">
+                    <input type="text" 
+                    ref={time}
+                    key="time"
+                    className="form-control"
+                    placeholder="time"
+                    />
+                </div>
+            </div>
         </div>
     );
 }
