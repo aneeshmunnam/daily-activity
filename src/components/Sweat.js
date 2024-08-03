@@ -17,7 +17,9 @@ export default function Sweat({selectedDate}) {
     useEffect(() => {
         const fetchSweats = async () => {
             try {
-                const selectedWorkTasks = await db.sweatTasks.where("date").equals(selectedDate).toArray();
+                const selectedRounds = await db.workoutConfigs.where("date").equals(selectedDate).toArray();
+                setConfigs(selectedRounds);
+                const selectedWorkTasks = await db.sweatTasks.where("date").anyOf(selectedDate).toArray();
                 setSweats(selectedWorkTasks);
             } catch (error) {
                 console.log("Error fetching items for date" +selectedDate);
@@ -25,6 +27,33 @@ export default function Sweat({selectedDate}) {
         };
         fetchSweats();
     }, [selectedDate]);
+
+    const handleWorkoutConfig = async(e) => {
+        const config = {
+            "id": Math.floor(Math.random() * 100000) + 1,
+            "type": workoutType.current.value,
+            "rounds": rounds.current.value.length === 0  ? ' ' : rounds.current.value,
+            "time": time.current.value.length === 0 ? ' ' : time.current.value
+        }
+
+        await db.workoutConfigs.add({
+            id: config.id,
+            type: config.type,
+            rounds: config.rounds,
+            time: config.time,
+            date: selectedDate
+        });
+
+        setConfigs([
+            ...configs,
+            config
+        ]);
+
+        workoutType.current.value = 'Select';
+        rounds.current.value = '';
+        time.current.value = '';
+        e.preventDefault();
+    };
 
     const handleSweat = async (e) => {
         if ((workout.current && workout.current.value.length === 0) || 
@@ -43,7 +72,8 @@ export default function Sweat({selectedDate}) {
             weight: sweatTask.weight,
             status: sweatTask.status,
             reps: sweatTask.reps,
-            date: selectedDate
+            date: selectedDate,
+            round_id: "1"
         });
         setSweats([
             ...sweats,
@@ -128,12 +158,28 @@ export default function Sweat({selectedDate}) {
                         />
                     </div>
                     <div className="col-3">
-                        <button className="btn btn-primary">Add Round</button>
+                        <button className="btn btn-primary" onClick={handleWorkoutConfig}>Add Round</button>
                     </div>
                 </div>
                 {
                     configs.map((config, index) => (
                         <div>
+                            <div className="row mt-3">
+                                <div className="col-auto">
+                                    <label>
+                                        <b>Workout Type:</b> {config.type}
+                                    </label>
+                                </div>
+                                <div className="col-auto">
+                                    <label>
+                                        <b>Rounds:</b> {config.rounds}
+                                    </label>
+                                </div>
+                                <div className="col-auto">
+                                    <label>
+                                        <b>Time:</b> {config.time}</label>    
+                                </div>
+                            </div>
                             <div className="row mt-3">
                                 <div className="col-5">
                                     <input type="text"
