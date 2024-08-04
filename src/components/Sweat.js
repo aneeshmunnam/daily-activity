@@ -183,21 +183,21 @@ export default function Sweat({selectedDate}) {
                             <div className="row mt-3">
                                 <div className="col-5">
                                     <input type="text"
-                                    key="workout"
+                                    key={`workoutinput-${index + 1}`}
                                     className="form-control"
                                     ref={workout}
                                     placeholder="Workout" />
                                 </div>
                                 <div className="col-2">
                                     <input type="text" 
-                                    key="weight"
+                                    key={`weightinput-${index + 1}`}
                                     ref={weight}
                                     className="form-control"
                                     placeholder="Lbs" />
                                 </div>
                                 <div className="col-2">
                                     <input type="text" 
-                                    key="reps"
+                                    key={`repsinput-${index + 1}`}
                                     className="form-control"
                                     placeholder="reps"
                                     ref={reps}
